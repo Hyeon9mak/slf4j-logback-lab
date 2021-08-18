@@ -10,8 +10,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation('org.slf4j:slf4j-api:1.7.31')
+    implementation('ch.qos.logback:logback-core:1.2.3')
+
+    // 로그백 클래식을 의존 추가하는 것만으로도 알아서 필요한 의존성들을 추가하지만,
+    // SLF4J API와 logback-core를 명시적으로 추가해주는게 더 좋은 방법이라고 한다.
+    implementation('ch.qos.logback:logback-classic:1.2.3') {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+        exclude group: 'ch.qos.logback', module: 'logback-core'
+    }
 }
 
 test {
